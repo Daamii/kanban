@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import NavBarComponent from "./routes/NavBarComponent";
 import RouteError from "./routes/RouteError";
-import { KanbanPage } from "./Screens/KanbanPage";
+import { KanbanPage } from "./Screens/Kanban/KanbanPage";
 
 const router = createBrowserRouter([
   {
