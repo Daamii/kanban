@@ -7,9 +7,15 @@ const NavBarComponent: React.FC<{ children?: ReactNode }> = ({ children }) => {
   return (
     <>
       <nav className="navbar">
-        <Link to={"/"}>/</Link>
-        <Link to={"/kanban"}>kanban</Link>
-        <Link to={"/error"}>error</Link>
+        <Link className="navbar__element" to={"/"}>
+          /
+        </Link>
+        <Link className="navbar__element" to={"/kanban"}>
+          kanban
+        </Link>
+        <Link className="navbar__element" to={"/error"}>
+          error
+        </Link>
       </nav>
       {children ?? null}
     </>

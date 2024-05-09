@@ -1,7 +1,7 @@
 export interface Data {
   id: number;
+  label: string;
   content: string;
-  // status: Status;
   columnId: number;
 }
 

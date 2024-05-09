@@ -91,14 +91,19 @@ export const KanbanCard = ({ data, handleDragging }: CardProps) => {
     handleDragging(true);
   };
   return (
-    <div
+    <span
       className="kanban-card"
       draggable
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <p>{data.content}</p>
-    </div>
+      <div className="kanban-card__label">{data.label}</div>
+      <div className="kanban-card__description">{data.content}</div>
+      <div className="kanban-card__buttons">
+        <div className="kanban-card__buttons__button">e</div>
+        <div className="kanban-card__buttons__button">r</div>
+      </div>
+    </span>
   );
 };
 
@@ -111,32 +116,38 @@ const sampleColumns: ColumnnType[] = [
 const sampleData: Data[] = [
   {
     id: 1,
-    content: "Item 1",
+    label: "Item 1",
+    content: "Item 1 description",
     columnId: 1,
   },
   {
     id: 2,
-    content: "Item 2",
+    label: "Item 2",
+    content: "Item 2 description, extended with more description",
     columnId: 1,
   },
   {
     id: 3,
-    content: "Item 3",
+    label: "Item 3",
+    content: "Item 3 description",
     columnId: 1,
   },
   {
     id: 4,
-    content: "Item 4",
+    label: "Item 4",
+    content: "Item 4 description",
     columnId: 1,
   },
   {
     id: 5,
-    content: "Item 5",
+    label: "Item 5",
+    content: "Item 5 description",
     columnId: 1,
   },
   {
     id: 6,
-    content: "Item 6",
+    label: "Item 6",
+    content: "Item 6 description",
     columnId: 1,
   },
 ];
