@@ -1,7 +1,7 @@
 import React from "react";
 import "./kanban.scss";
 import { Data, ColumnnType } from "./types";
-import { useDragAndDrop } from "./useDragAndDrops";
+import { useDragAndDrop } from "../../hooks/useDragAndDrops";
 import { MdDelete, MdEdit } from "react-icons/md";
 
 interface DragAndDropProps {
@@ -22,7 +22,7 @@ interface CardProps {
   handleDragging: (dragging: boolean) => void;
 }
 
-export const DragAndDrop = ({ initialData, columns }: DragAndDropProps) => {
+export const KanbanGrid = ({ initialData, columns }: DragAndDropProps) => {
   const { isDragging, listItems, handleDragging, handleUpdateList } =
     useDragAndDrop(initialData || sampleData);
 

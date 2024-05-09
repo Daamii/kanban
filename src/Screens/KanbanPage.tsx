@@ -1,11 +1,11 @@
 import React from "react";
-import { DragAndDrop } from "../features/DragAndDrop/DragAndDrop";
+import { KanbanGrid } from "../features/Kanban/Kanban";
 
 export const KanbanPage = () => {
   return (
     <>
       <div>KanbanPage</div>
-      <DragAndDrop />
+      <KanbanGrid />
     </>
   );
 };

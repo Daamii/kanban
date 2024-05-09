@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ColumnnType, Data } from "./types";
+import { ColumnnType, Data } from "../features/Kanban/types";
 
 export const useDragAndDrop = (initialState: Data[]) => {
   const [isDragging, setIsDragging] = useState(false);
