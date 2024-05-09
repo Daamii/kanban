@@ -1,17 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
 import NavBarComponent from "./routes/NavBarComponent";
 import RouteError from "./routes/RouteError";
 import { KanbanPage } from "./Screens/KanbanPage";
-import App from "./App";
 
 const router = createBrowserRouter([
   {
@@ -28,15 +22,6 @@ const router = createBrowserRouter([
     ),
   },
 ]);
-
-// const router = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route path="/" element={<App />}>
-//       <Route path="/" element={<RouterSidebar />} />
-//       <Route path="/kanban" element={<KanbanPage />} />
-//     </Route>
-//   )
-// );
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
