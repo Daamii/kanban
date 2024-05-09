@@ -147,7 +147,8 @@ const sampleData: Data[] = [
   {
     id: 2,
     label: "Item 2",
-    content: "Item 2 description, extended with more description",
+    content:
+      "Item 2 description, extended with more description with more than 2 lines",
     columnId: 1,
   },
   {
