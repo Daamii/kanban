@@ -69,7 +69,7 @@ export const KanbanColumn = ({
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
-      <p>{status.label}</p>
+      <div className="kanban-column__title">{status.label}</div>
       {items.map(
         (item) =>
           status.id === item.columnId && (
@@ -105,6 +105,7 @@ export const KanbanCard = ({ data, handleDragging }: CardProps) => {
 const sampleColumns: ColumnnType[] = [
   { id: 1, label: "Main Column" },
   { id: 2, label: "Secondary Column" },
+  { id: 3, label: "Extra Column" },
 ];
 
 const sampleData: Data[] = [
@@ -126,6 +127,16 @@ const sampleData: Data[] = [
   {
     id: 4,
     content: "Item 4",
+    columnId: 1,
+  },
+  {
+    id: 5,
+    content: "Item 5",
+    columnId: 1,
+  },
+  {
+    id: 6,
+    content: "Item 6",
     columnId: 1,
   },
 ];
