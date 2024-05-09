@@ -2,6 +2,7 @@ import React from "react";
 import "./kanban.scss";
 import { Data, ColumnnType } from "./types";
 import { useDragAndDrop } from "./useDragAndDrops";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 interface DragAndDropProps {
   initialData?: Data[];
@@ -70,16 +71,18 @@ export const KanbanColumn = ({
       onDrop={handleDrop}
     >
       <div className="kanban-column__title">{status.label}</div>
-      {items.map(
-        (item) =>
-          status.id === item.columnId && (
-            <KanbanCard
-              data={item}
-              key={item.id}
-              handleDragging={handleDragging}
-            />
-          )
-      )}
+      <div className="kanban-column__content">
+        {items.map(
+          (item) =>
+            status.id === item.columnId && (
+              <KanbanCard
+                data={item}
+                key={item.id}
+                handleDragging={handleDragging}
+              />
+            )
+        )}
+      </div>
     </div>
   );
 };
@@ -100,8 +103,12 @@ export const KanbanCard = ({ data, handleDragging }: CardProps) => {
       <div className="kanban-card__label">{data.label}</div>
       <div className="kanban-card__description">{data.content}</div>
       <div className="kanban-card__buttons">
-        <div className="kanban-card__buttons__button">e</div>
-        <div className="kanban-card__buttons__button">r</div>
+        <div className="kanban-card__buttons__button">
+          <MdEdit />
+        </div>
+        <div className="kanban-card__buttons__button">
+          <MdDelete />
+        </div>
       </div>
     </span>
   );
