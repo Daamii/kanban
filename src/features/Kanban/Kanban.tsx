@@ -15,16 +15,23 @@ interface ColumnProps {
   isDragging: boolean;
   handleDragging: (dragging: boolean) => void;
   handleUpdateList: (id: number, status: ColumnnType["id"]) => void;
+  handleRemoveFromList: (id: number) => void;
 }
 
 interface CardProps {
   data: Data;
   handleDragging: (dragging: boolean) => void;
+  handleRemoveFromList: (id: number) => void;
 }
 
 export const KanbanGrid = ({ initialData, columns }: DragAndDropProps) => {
-  const { isDragging, listItems, handleDragging, handleUpdateList } =
-    useDragAndDrop(initialData || sampleData);
+  const {
+    isDragging,
+    listItems,
+    handleDragging,
+    handleUpdateList,
+    handleRemoveFromList,
+  } = useDragAndDrop(initialData || sampleData);
 
   return (
     <div className="kanban-grid">
@@ -36,6 +43,7 @@ export const KanbanGrid = ({ initialData, columns }: DragAndDropProps) => {
           isDragging={isDragging}
           handleDragging={handleDragging}
           handleUpdateList={handleUpdateList}
+          handleRemoveFromList={handleRemoveFromList}
         />
       ))}
     </div>
@@ -48,6 +56,7 @@ export const KanbanColumn = ({
   isDragging,
   handleDragging,
   handleUpdateList,
+  handleRemoveFromList,
 }: ColumnProps) => {
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -79,6 +88,7 @@ export const KanbanColumn = ({
                 data={item}
                 key={item.id}
                 handleDragging={handleDragging}
+                handleRemoveFromList={handleRemoveFromList}
               />
             )
         )}
@@ -87,7 +97,11 @@ export const KanbanColumn = ({
   );
 };
 
-export const KanbanCard = ({ data, handleDragging }: CardProps) => {
+export const KanbanCard = ({
+  data,
+  handleDragging,
+  handleRemoveFromList,
+}: CardProps) => {
   const handleDragEnd = () => handleDragging(false);
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData("text", `${data.id}`);
@@ -106,7 +120,10 @@ export const KanbanCard = ({ data, handleDragging }: CardProps) => {
         <div className="kanban-card__buttons__button">
           <MdEdit />
         </div>
-        <div className="kanban-card__buttons__button">
+        <div
+          className="kanban-card__buttons__button"
+          onClick={() => handleRemoveFromList(data.id)}
+        >
           <MdDelete />
         </div>
       </div>

@@ -14,6 +14,9 @@ export const useDragAndDrop = (initialState: Data[]) => {
       setListItems((prev) => [card!, ...prev.filter((item) => item.id !== id)]);
     }
   };
+  const handleRemoveFromList = (id: number) => {
+    setListItems((prev) => [...prev.filter((item) => item.id !== id)]);
+  };
 
   const handleDragging = (dragging: boolean) => setIsDragging(dragging);
 
@@ -22,5 +25,6 @@ export const useDragAndDrop = (initialState: Data[]) => {
     listItems,
     handleUpdateList,
     handleDragging,
+    handleRemoveFromList,
   };
 };
