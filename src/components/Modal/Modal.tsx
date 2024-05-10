@@ -4,12 +4,13 @@ import { MdOutlineClose } from "react-icons/md";
 import "./modal.scss";
 
 interface Props {
+  title: string;
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
 }
 
-const Modal = ({ isOpen, onClose, children }: Props) => {
+const Modal = ({ title, isOpen, onClose, children }: Props) => {
   if (!isOpen) return null;
 
   const handleCloseModal = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -24,7 +25,8 @@ const Modal = ({ isOpen, onClose, children }: Props) => {
         <MdOutlineClose />
       </button>
       <div className="modal">
-        <div className="modal-content">{children}</div>
+        <h1 className="modal__header">{title}</h1>
+        <div className="modal__content">{children}</div>
       </div>
     </div>
   );
