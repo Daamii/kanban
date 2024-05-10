@@ -47,6 +47,7 @@ const sampleData: Data[] = [
     label: "Item 1",
     content: "Item 1 description",
     columnId: 1,
+    creationDate: new Date(),
   },
   {
     id: 2,
@@ -54,29 +55,34 @@ const sampleData: Data[] = [
     content:
       "Item 2 description, extended with more description with more than 2 lines",
     columnId: 1,
+    creationDate: new Date(),
   },
   {
     id: 3,
     label: "Item 3",
     content: "Item 3 description",
     columnId: 1,
+    creationDate: new Date(),
   },
   {
     id: 4,
     label: "Item 4",
     content: "Item 4 description",
     columnId: 1,
+    creationDate: new Date(),
   },
   {
     id: 5,
     label: "Item 5",
     content: "Item 5 description",
     columnId: 1,
+    creationDate: new Date(),
   },
   {
     id: 6,
     label: "Item 6",
     content: "Item 6 description",
     columnId: 1,
+    creationDate: new Date(),
   },
 ];
