@@ -2,29 +2,14 @@ import React from "react";
 import "./kanban.scss";
 import { Data, ColumnnType } from "./types";
 import { useDragAndDrop } from "../../hooks/useDragAndDrops";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { KanbanColumn } from "./KanbanColumn";
 
-interface DragAndDropProps {
+interface Props {
   initialData?: Data[];
   columns?: ColumnnType[];
 }
 
-interface ColumnProps {
-  status: ColumnnType;
-  items: Data[];
-  isDragging: boolean;
-  handleDragging: (dragging: boolean) => void;
-  handleUpdateList: (id: number, status: ColumnnType["id"]) => void;
-  handleRemoveFromList: (id: number) => void;
-}
-
-interface CardProps {
-  data: Data;
-  handleDragging: (dragging: boolean) => void;
-  handleRemoveFromList: (id: number) => void;
-}
-
-export const KanbanGrid = ({ initialData, columns }: DragAndDropProps) => {
+export const KanbanGrid = ({ initialData, columns }: Props) => {
   const {
     isDragging,
     listItems,
@@ -47,87 +32,6 @@ export const KanbanGrid = ({ initialData, columns }: DragAndDropProps) => {
         />
       ))}
     </div>
-  );
-};
-
-export const KanbanColumn = ({
-  status,
-  items,
-  isDragging,
-  handleDragging,
-  handleUpdateList,
-  handleRemoveFromList,
-}: ColumnProps) => {
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    console.debug(
-      "dropping: ",
-      +e.dataTransfer.getData("text"),
-      " at ",
-      status
-    );
-    const id = +e.dataTransfer.getData("text");
-    handleUpdateList(id, status.id);
-    handleDragging(false);
-  };
-  return (
-    <div
-      className={`kanban-column ${isDragging ? "layout-dragging" : ""}`}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-    >
-      <div className="kanban-column__title">{status.label}</div>
-      <div className="kanban-column__content">
-        {items.map(
-          (item) =>
-            status.id === item.columnId && (
-              <KanbanCard
-                data={item}
-                key={item.id}
-                handleDragging={handleDragging}
-                handleRemoveFromList={handleRemoveFromList}
-              />
-            )
-        )}
-      </div>
-    </div>
-  );
-};
-
-export const KanbanCard = ({
-  data,
-  handleDragging,
-  handleRemoveFromList,
-}: CardProps) => {
-  const handleDragEnd = () => handleDragging(false);
-  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    e.dataTransfer.setData("text", `${data.id}`);
-    handleDragging(true);
-  };
-  return (
-    <span
-      className="kanban-card"
-      draggable
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}
-    >
-      <div className="kanban-card__label">{data.label}</div>
-      <div className="kanban-card__description">{data.content}</div>
-      <div className="kanban-card__buttons">
-        <div className="kanban-card__buttons__button">
-          <MdEdit />
-        </div>
-        <div
-          className="kanban-card__buttons__button"
-          onClick={() => handleRemoveFromList(data.id)}
-        >
-          <MdDelete />
-        </div>
-      </div>
-    </span>
   );
 };
 
