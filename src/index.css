@@ -18,8 +18,13 @@
   --color-dark: #082032;
   --color-white: #eeeeee;
 
+  --modal-bg: #eeeeee;
+
   --radius-sm: 2px;
   --radius-md: 10px;
+
+  --basic-shadow-box: 0 0 10px rgba(0, 0, 0, 0.3);
+  --hover-shadow-box: rgba(0, 0, 0, 0.24) 0px 8px 13px;
 }
 
 a {
