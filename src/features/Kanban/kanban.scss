@@ -17,11 +17,20 @@
   height: 70vh;
   border-radius: 3px;
 
-  &__title {
-    border-bottom: solid 1px;
+  &__header {
+    display: flex;
     width: 100%;
-  }
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid 1px;
 
+    &__title {
+      width: 100%;
+    }
+    &__burger:hover {
+      cursor: pointer;
+    }
+  }
   &__content {
     display: flex;
     flex-direction: column;

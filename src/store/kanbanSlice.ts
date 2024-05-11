@@ -74,9 +74,7 @@ const kanbanSlice = createSlice({
     pushTask: (state, action) => {
       state.tasks.push(action.payload);
     },
-    setColumns: (state, action) => {
-      state.columns = action.payload;
-    },
+
     updateList: (
       state,
       action: PayloadAction<{ taskId: string; newColumnId: string }>
@@ -95,6 +93,17 @@ const kanbanSlice = createSlice({
       const { id } = action.payload;
       state.tasks = state.tasks.filter((t) => t.uuid != id);
     },
+    setColumns: (state, action) => {
+      state.columns = action.payload;
+    },
+    updateColumn: (state, action: PayloadAction<ColumnnType>) => {
+      const { payload: column } = action;
+
+      const colIndex = state.columns.findIndex(
+        (item) => item.uuid === column.uuid
+      );
+      state.columns[colIndex] = column;
+    },
   },
 });
 
@@ -105,6 +114,12 @@ export const selectTasks = createSelector(
   (kanban) => kanban.tasks
 );
 
-export const { setTasks, pushTask, setColumns, updateList, removeTaskById } =
-  kanbanSlice.actions;
+export const {
+  setTasks,
+  pushTask,
+  updateList,
+  removeTaskById,
+  setColumns,
+  updateColumn,
+} = kanbanSlice.actions;
 export default kanbanSlice.reducer;

@@ -17,15 +17,15 @@ export const KanbanGrid = ({ tasks, columns }: Props) => {
 
   return (
     <div className="kanban-grid">
-      {columns.map((container) => (
+      {columns.map((column) => (
         <KanbanColumn
-          status={container}
-          key={container.uuid}
+          column={column}
+          key={column.uuid}
           items={tasks}
           isDragging={isDragging}
           handleDragging={handleDragging}
-          handleUpdateList={(id, status) =>
-            dispatch(updateList({ taskId: id, newColumnId: status }))
+          handleUpdateList={(taskId, columnId) =>
+            dispatch(updateList({ taskId: taskId, newColumnId: columnId }))
           }
           handleRemoveFromList={(id) => dispatch(removeTaskById({ id }))}
         />
