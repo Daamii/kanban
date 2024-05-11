@@ -1,6 +1,6 @@
 import React from "react";
 import { KanbanCard } from "./KanbanCard";
-import { ColumnnType, Data } from "./types";
+import { ColumnnType, Data } from "../../Types/types";
 
 interface ColumnProps {
   status: ColumnnType;

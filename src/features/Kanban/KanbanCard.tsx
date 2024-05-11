@@ -1,6 +1,6 @@
 import React from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
-import { Data } from "./types";
+import { Data } from "../../Types/types";
 
 interface CardProps {
   data: Data;

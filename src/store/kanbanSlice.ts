@@ -1,39 +1,5 @@
-import React from "react";
-import "./kanban.scss";
-import { Data, ColumnnType } from "./types";
-import { useDragAndDrop } from "../../hooks/useDragAndDrops";
-import { KanbanColumn } from "./KanbanColumn";
-
-interface Props {
-  initialData?: Data[];
-  columns?: ColumnnType[];
-}
-
-export const KanbanGrid = ({ initialData, columns }: Props) => {
-  const {
-    isDragging,
-    listItems,
-    handleDragging,
-    handleUpdateList,
-    handleRemoveFromList,
-  } = useDragAndDrop(initialData || sampleData);
-
-  return (
-    <div className="kanban-grid">
-      {(columns || sampleColumns).map((container) => (
-        <KanbanColumn
-          status={container}
-          key={container.id}
-          items={listItems}
-          isDragging={isDragging}
-          handleDragging={handleDragging}
-          handleUpdateList={handleUpdateList}
-          handleRemoveFromList={handleRemoveFromList}
-        />
-      ))}
-    </div>
-  );
-};
+import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { ColumnnType, Data } from "../Types/types";
 
 const sampleColumns: ColumnnType[] = [
   { id: 1, label: "Main Column" },
@@ -86,3 +52,35 @@ const sampleData: Data[] = [
     creationDate: new Date(),
   },
 ];
+
+interface KanbanState {
+  tasks: Data[];
+  columns: ColumnnType[];
+}
+
+const initialState: KanbanState = {
+  tasks: sampleData,
+  columns: sampleColumns,
+};
+
+const kanbanSlice = createSlice({
+  name: "kanban",
+  initialState,
+  reducers: {
+    setTasks: (state, action) => {
+      state.tasks = action.payload;
+    },
+  },
+});
+
+// Define un selector para obtener todo el slice
+export const selectKanban = (state: { kanban: KanbanState }) => state.kanban;
+
+// Opcional: Define un selector para obtener solo las tareas
+export const selectTasks = createSelector(
+  selectKanban,
+  (kanban) => kanban.tasks
+);
+
+export const { setTasks } = kanbanSlice.actions;
+export default kanbanSlice.reducer;
