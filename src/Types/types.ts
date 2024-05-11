@@ -1,7 +1,7 @@
 export interface Data {
   id: number;
   label: string;
-  creationDate: Date;
+  creationDate: string;
   columnId: number;
   content?: string;
 }

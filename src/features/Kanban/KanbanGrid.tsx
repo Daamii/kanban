@@ -3,6 +3,8 @@ import "./kanban.scss";
 import { Data, ColumnnType } from "../../Types/types";
 import { useDragAndDrop } from "../../hooks/useDragAndDrops";
 import { KanbanColumn } from "./KanbanColumn";
+import { useDispatch } from "react-redux";
+import { removeTaskById, updateList } from "../../store/kanbanSlice";
 
 interface Props {
   tasks: Data[];
@@ -10,13 +12,8 @@ interface Props {
 }
 
 export const KanbanGrid = ({ tasks, columns }: Props) => {
-  const {
-    isDragging,
-    listItems,
-    handleDragging,
-    handleUpdateList,
-    handleRemoveFromList,
-  } = useDragAndDrop(tasks);
+  const dispatch = useDispatch();
+  const { isDragging, handleDragging } = useDragAndDrop();
 
   return (
     <div className="kanban-grid">
@@ -24,11 +21,13 @@ export const KanbanGrid = ({ tasks, columns }: Props) => {
         <KanbanColumn
           status={container}
           key={container.id}
-          items={listItems}
+          items={tasks}
           isDragging={isDragging}
           handleDragging={handleDragging}
-          handleUpdateList={handleUpdateList}
-          handleRemoveFromList={handleRemoveFromList}
+          handleUpdateList={(id, status) =>
+            dispatch(updateList({ id, status }))
+          }
+          handleRemoveFromList={(id) => dispatch(removeTaskById({ id }))}
         />
       ))}
     </div>

@@ -1,4 +1,4 @@
-import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ColumnnType, Data } from "../Types/types";
 
 const sampleColumns: ColumnnType[] = [
@@ -13,7 +13,7 @@ const sampleData: Data[] = [
     label: "Item 1",
     content: "Item 1 description",
     columnId: 1,
-    creationDate: new Date(),
+    creationDate: new Date().toISOString(),
   },
   {
     id: 2,
@@ -21,35 +21,35 @@ const sampleData: Data[] = [
     content:
       "Item 2 description, extended with more description with more than 2 lines",
     columnId: 1,
-    creationDate: new Date(),
+    creationDate: new Date().toISOString(),
   },
   {
     id: 3,
     label: "Item 3",
     content: "Item 3 description",
     columnId: 1,
-    creationDate: new Date(),
+    creationDate: new Date().toISOString(),
   },
   {
     id: 4,
     label: "Item 4",
     content: "Item 4 description",
     columnId: 1,
-    creationDate: new Date(),
+    creationDate: new Date().toISOString(),
   },
   {
     id: 5,
     label: "Item 5",
     content: "Item 5 description",
     columnId: 1,
-    creationDate: new Date(),
+    creationDate: new Date().toISOString(),
   },
   {
     id: 6,
     label: "Item 6",
     content: "Item 6 description",
     columnId: 1,
-    creationDate: new Date(),
+    creationDate: new Date().toISOString(),
   },
 ];
 
@@ -70,17 +70,37 @@ const kanbanSlice = createSlice({
     setTasks: (state, action) => {
       state.tasks = action.payload;
     },
+    pushTask: (state, action) => {
+      state.tasks.push(action.payload);
+    },
+    setColumns: (state, action) => {
+      state.columns = action.payload;
+    },
+    updateList: (
+      state,
+      action: PayloadAction<{ id: number; status: number }>
+    ) => {
+      const { id, status } = action.payload;
+      const cardIndex = state.tasks.findIndex((item) => item.id === id);
+
+      if (cardIndex !== -1 && state.tasks[cardIndex].columnId !== status) {
+        state.tasks[cardIndex].columnId = status;
+      }
+    },
+    removeTaskById: (state, action: PayloadAction<{ id: number }>) => {
+      const { id } = action.payload;
+      state.tasks = state.tasks.filter((t) => t.id != id);
+    },
   },
 });
 
-// Define un selector para obtener todo el slice
 export const selectKanban = (state: { kanban: KanbanState }) => state.kanban;
 
-// Opcional: Define un selector para obtener solo las tareas
 export const selectTasks = createSelector(
   selectKanban,
   (kanban) => kanban.tasks
 );
 
-export const { setTasks } = kanbanSlice.actions;
+export const { setTasks, pushTask, setColumns, updateList, removeTaskById } =
+  kanbanSlice.actions;
 export default kanbanSlice.reducer;
