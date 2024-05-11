@@ -7,7 +7,7 @@ interface ColumnProps {
   items: TaskType[];
   isDragging: boolean;
   handleDragging: (dragging: boolean) => void;
-  handleUpdateList: (id: TaskType["uuid"], status: ColumnnType["id"]) => void;
+  handleUpdateList: (id: TaskType["uuid"], status: ColumnnType["uuid"]) => void;
   handleRemoveFromList: (id: TaskType["uuid"]) => void;
 }
 
@@ -26,7 +26,7 @@ export const KanbanColumn = ({
     e.preventDefault();
     console.debug("dropping: ", e.dataTransfer.getData("text"), " at ", status);
     const id = e.dataTransfer.getData("text");
-    handleUpdateList(id, status.id);
+    handleUpdateList(id, status.uuid);
     handleDragging(false);
   };
 
@@ -40,7 +40,7 @@ export const KanbanColumn = ({
       <div className="kanban-column__content">
         {items.map(
           (item) =>
-            status.id === item.columnId && (
+            status.uuid === item.columnUuid && (
               <KanbanCard
                 data={item}
                 key={item.uuid}

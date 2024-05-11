@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { v4 } from "uuid";
 import { KanbanGrid } from "../../features/Kanban/KanbanGrid";
 import { selectKanban, setColumns } from "../../store/kanbanSlice";
+import { ColumnnType } from "../../Types/types";
 
 import "./kanban-page.scss";
 import { TaskForm } from "./TaskForm";
@@ -24,9 +26,9 @@ export const KanbanPage = () => {
                 setColumns([
                   ...kanbanData.columns,
                   {
-                    id: 99,
+                    uuid: v4(),
                     label: "new",
-                  },
+                  } as ColumnnType,
                 ])
               );
           }}

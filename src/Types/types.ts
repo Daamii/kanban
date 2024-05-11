@@ -2,11 +2,13 @@ export interface TaskType {
   uuid: string;
   label: string;
   creationDate: string;
-  columnId: number;
+  columnUuid: string;
   content?: string;
+  order?: number;
 }
 
 export interface ColumnnType {
-  id: number;
+  uuid: string;
   label: string;
+  order?: number;
 }

@@ -24,7 +24,7 @@ export const TaskForm = ({ isModalOpen, setModalOpen }: Props) => {
       label: inputValue,
       content: descriptionValue,
       creationDate: new Date().toISOString(),
-      columnId: 1,
+      columnUuid: "1",
     };
     dispatch(pushTask(newTask));
   };
