@@ -1,5 +1,5 @@
-export interface Data {
-  id: number;
+export interface TaskType {
+  uuid: string;
   label: string;
   creationDate: string;
   columnId: number;

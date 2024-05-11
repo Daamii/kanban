@@ -1,5 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ColumnnType, Data } from "../Types/types";
+import { v4 } from "uuid";
+import { ColumnnType, TaskType } from "../Types/types";
 
 const sampleColumns: ColumnnType[] = [
   { id: 1, label: "Main Column" },
@@ -7,16 +8,16 @@ const sampleColumns: ColumnnType[] = [
   { id: 3, label: "Extra Column" },
 ];
 
-const sampleData: Data[] = [
+const sampleData: TaskType[] = [
   {
-    id: 1,
+    uuid: v4(),
     label: "Item 1",
     content: "Item 1 description",
     columnId: 1,
     creationDate: new Date().toISOString(),
   },
   {
-    id: 2,
+    uuid: v4(),
     label: "Item 2",
     content:
       "Item 2 description, extended with more description with more than 2 lines",
@@ -24,28 +25,28 @@ const sampleData: Data[] = [
     creationDate: new Date().toISOString(),
   },
   {
-    id: 3,
+    uuid: v4(),
     label: "Item 3",
     content: "Item 3 description",
     columnId: 1,
     creationDate: new Date().toISOString(),
   },
   {
-    id: 4,
+    uuid: v4(),
     label: "Item 4",
     content: "Item 4 description",
     columnId: 1,
     creationDate: new Date().toISOString(),
   },
   {
-    id: 5,
+    uuid: v4(),
     label: "Item 5",
     content: "Item 5 description",
     columnId: 1,
     creationDate: new Date().toISOString(),
   },
   {
-    id: 6,
+    uuid: v4(),
     label: "Item 6",
     content: "Item 6 description",
     columnId: 1,
@@ -54,7 +55,7 @@ const sampleData: Data[] = [
 ];
 
 interface KanbanState {
-  tasks: Data[];
+  tasks: TaskType[];
   columns: ColumnnType[];
 }
 
@@ -78,18 +79,18 @@ const kanbanSlice = createSlice({
     },
     updateList: (
       state,
-      action: PayloadAction<{ id: number; status: number }>
+      action: PayloadAction<{ id: string; status: number }>
     ) => {
       const { id, status } = action.payload;
-      const cardIndex = state.tasks.findIndex((item) => item.id === id);
+      const cardIndex = state.tasks.findIndex((item) => item.uuid === id);
 
       if (cardIndex !== -1 && state.tasks[cardIndex].columnId !== status) {
         state.tasks[cardIndex].columnId = status;
       }
     },
-    removeTaskById: (state, action: PayloadAction<{ id: number }>) => {
+    removeTaskById: (state, action: PayloadAction<{ id: string }>) => {
       const { id } = action.payload;
-      state.tasks = state.tasks.filter((t) => t.id != id);
+      state.tasks = state.tasks.filter((t) => t.uuid != id);
     },
   },
 });

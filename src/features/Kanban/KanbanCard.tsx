@@ -1,11 +1,11 @@
 import React from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
-import { Data } from "../../Types/types";
+import { TaskType } from "../../Types/types";
 
 interface CardProps {
-  data: Data;
+  data: TaskType;
   handleDragging: (dragging: boolean) => void;
-  handleRemoveFromList: (id: number) => void;
+  handleRemoveFromList: (id: string) => void;
 }
 
 export const KanbanCard = ({
@@ -15,7 +15,7 @@ export const KanbanCard = ({
 }: CardProps) => {
   const handleDragEnd = () => handleDragging(false);
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    e.dataTransfer.setData("text", `${data.id}`);
+    e.dataTransfer.setData("text", `${data.uuid}`);
     handleDragging(true);
   };
   return (
@@ -33,7 +33,7 @@ export const KanbanCard = ({
         </div>
         <div
           className="kanban-card__buttons__button"
-          onClick={() => handleRemoveFromList(data.id)}
+          onClick={() => handleRemoveFromList(data.uuid)}
         >
           <MdDelete />
         </div>

@@ -4,7 +4,8 @@ import TextArea from "../../components/Inputs/TextArea";
 import TextInput from "../../components/Inputs/TextInput";
 import Modal from "../../components/Modal/Modal";
 import { pushTask } from "../../store/kanbanSlice";
-import { Data } from "../../Types/types";
+import { TaskType } from "../../Types/types";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
   isModalOpen: boolean;
@@ -18,8 +19,8 @@ export const TaskForm = ({ isModalOpen, setModalOpen }: Props) => {
   const [descriptionValue, setDescriptionValue] = useState<string>("");
 
   const saveTask = () => {
-    const newTask: Data = {
-      id: 99,
+    const newTask: TaskType = {
+      uuid: uuidv4(),
       label: inputValue,
       content: descriptionValue,
       creationDate: new Date().toISOString(),

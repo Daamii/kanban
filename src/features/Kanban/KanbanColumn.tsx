@@ -1,14 +1,14 @@
 import React from "react";
 import { KanbanCard } from "./KanbanCard";
-import { ColumnnType, Data } from "../../Types/types";
+import { ColumnnType, TaskType } from "../../Types/types";
 
 interface ColumnProps {
   status: ColumnnType;
-  items: Data[];
+  items: TaskType[];
   isDragging: boolean;
   handleDragging: (dragging: boolean) => void;
-  handleUpdateList: (id: number, status: ColumnnType["id"]) => void;
-  handleRemoveFromList: (id: number) => void;
+  handleUpdateList: (id: TaskType["uuid"], status: ColumnnType["id"]) => void;
+  handleRemoveFromList: (id: TaskType["uuid"]) => void;
 }
 
 export const KanbanColumn = ({
@@ -24,13 +24,8 @@ export const KanbanColumn = ({
   };
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.debug(
-      "dropping: ",
-      +e.dataTransfer.getData("text"),
-      " at ",
-      status
-    );
-    const id = +e.dataTransfer.getData("text");
+    console.debug("dropping: ", e.dataTransfer.getData("text"), " at ", status);
+    const id = e.dataTransfer.getData("text");
     handleUpdateList(id, status.id);
     handleDragging(false);
   };
@@ -48,7 +43,7 @@ export const KanbanColumn = ({
             status.id === item.columnId && (
               <KanbanCard
                 data={item}
-                key={item.id}
+                key={item.uuid}
                 handleDragging={handleDragging}
                 handleRemoveFromList={handleRemoveFromList}
               />

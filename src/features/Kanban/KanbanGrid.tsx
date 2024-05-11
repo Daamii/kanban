@@ -1,13 +1,13 @@
 import React from "react";
 import "./kanban.scss";
-import { Data, ColumnnType } from "../../Types/types";
+import { TaskType, ColumnnType } from "../../Types/types";
 import { useDragAndDrop } from "../../hooks/useDragAndDrops";
 import { KanbanColumn } from "./KanbanColumn";
 import { useDispatch } from "react-redux";
 import { removeTaskById, updateList } from "../../store/kanbanSlice";
 
 interface Props {
-  tasks: Data[];
+  tasks: TaskType[];
   columns: ColumnnType[];
 }
 
