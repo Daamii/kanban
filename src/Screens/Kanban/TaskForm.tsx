@@ -35,7 +35,11 @@ export const TaskForm = ({ isModalOpen, setModalOpen }: Props) => {
       onClose={() => setModalOpen(false)}
       title={"Create new Task"}
     >
-      <TextInput placeholder="Task name" onInputChange={setInputValue} />
+      <TextInput
+        label="Task name"
+        placeholder=""
+        onInputChange={setInputValue}
+      />
       <TextArea
         placeholder="Task description"
         onInputChange={setDescriptionValue}
