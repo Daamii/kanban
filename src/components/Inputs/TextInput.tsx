@@ -5,11 +5,13 @@ import "./inputs.scss";
 interface TextInputProps {
   placeholder?: string;
   defaulValue?: string;
+  label?: string;
   onInputChange: (value: string) => void;
 }
 
-const TextInput: React.FC<TextInputProps> = ({
+export const TextInput: React.FC<TextInputProps> = ({
   placeholder,
+  label,
   defaulValue,
   onInputChange,
 }) => {
@@ -19,13 +21,16 @@ const TextInput: React.FC<TextInputProps> = ({
   };
 
   return (
-    <input
-      type="text"
-      className="text-input"
-      defaultValue={defaulValue}
-      placeholder={placeholder}
-      onChange={handleChange}
-    />
+    <label className="simple-input">
+      <input
+        className="simple-input__field"
+        type="text"
+        value={defaulValue}
+        placeholder={placeholder}
+        onChange={handleChange}
+      />
+      <span className="simple-input__label">{label || "not labeled"}</span>
+    </label>
   );
 };
 

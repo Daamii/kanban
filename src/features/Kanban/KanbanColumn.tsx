@@ -81,11 +81,15 @@ const ColumnModifyForm = ({
   hideForm: () => void;
 }) => {
   const dispatch = useDispatch();
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>(value.label);
 
   return (
     <>
-      <TextInput defaulValue={value.label} onInputChange={setInputValue} />
+      <TextInput
+        label="Column name"
+        defaulValue={value.label}
+        onInputChange={setInputValue}
+      />
       <button
         onClick={() => {
           dispatch(updateColumn({ ...value, label: inputValue }));
