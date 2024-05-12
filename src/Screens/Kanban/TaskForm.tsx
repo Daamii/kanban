@@ -9,10 +9,10 @@ import { v4 as uuidv4 } from "uuid";
 
 interface Props {
   isModalOpen: boolean;
-  setModalOpen: (value: boolean) => void;
+  closeModal: () => void;
 }
 
-export const TaskForm = ({ isModalOpen, setModalOpen }: Props) => {
+export const TaskForm = ({ isModalOpen, closeModal }: Props) => {
   const dispatch = useDispatch();
 
   const [inputValue, setInputValue] = useState<string>("");
@@ -27,14 +27,11 @@ export const TaskForm = ({ isModalOpen, setModalOpen }: Props) => {
       columnUuid: "1",
     };
     dispatch(pushTask(newTask));
+    closeModal();
   };
 
   return (
-    <Modal
-      isOpen={isModalOpen}
-      onClose={() => setModalOpen(false)}
-      title={"Create new Task"}
-    >
+    <Modal isOpen={isModalOpen} onClose={closeModal} title={"Create new Task"}>
       <TextInput
         label="Task name"
         placeholder=""

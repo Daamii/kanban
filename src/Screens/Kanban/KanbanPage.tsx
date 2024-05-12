@@ -36,7 +36,7 @@ export const KanbanPage = () => {
           add column
         </button>
       </div>
-      <TaskForm isModalOpen={isOpen} setModalOpen={setIsOpen} />
+      <TaskForm isModalOpen={isOpen} closeModal={() => setIsOpen(false)} />
       <KanbanGrid tasks={kanbanData.tasks} columns={kanbanData.columns} />
     </div>
   );
