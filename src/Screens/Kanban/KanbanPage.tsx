@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
+import { PrimaryButton } from "../../components/Buttons/ButtonPrimary";
 import { KanbanGrid } from "../../features/Kanban/KanbanGrid";
 import { selectKanban, setColumns } from "../../store/kanbanSlice";
 import { ColumnnType } from "../../Types/types";
@@ -18,8 +19,10 @@ export const KanbanPage = () => {
   return (
     <div className="kanban-page">
       <div>
-        <button onClick={() => setIsOpen(true)}>create task</button>
-        <button
+        <PrimaryButton onClick={() => setIsOpen(true)}>
+          create task
+        </PrimaryButton>
+        <PrimaryButton
           onClick={() => {
             kanbanData.columns.length <= 4 &&
               dispatch(
@@ -34,7 +37,7 @@ export const KanbanPage = () => {
           }}
         >
           add column
-        </button>
+        </PrimaryButton>
       </div>
       <TaskForm isModalOpen={isOpen} closeModal={() => setIsOpen(false)} />
       <KanbanGrid tasks={kanbanData.tasks} columns={kanbanData.columns} />

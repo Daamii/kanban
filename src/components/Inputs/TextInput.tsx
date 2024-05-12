@@ -25,7 +25,7 @@ export const TextInput: React.FC<TextInputProps> = ({
       <input
         className="simple-input__field"
         type="text"
-        value={defaulValue}
+        defaultValue={defaulValue}
         placeholder={placeholder}
         onChange={handleChange}
       />

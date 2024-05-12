@@ -5,6 +5,7 @@ import { MdDensityMedium as Burger } from "react-icons/md";
 import TextInput from "../../components/Inputs/TextInput";
 import { useDispatch } from "react-redux";
 import { updateColumn } from "../../store/kanbanSlice";
+import { PrimaryButton } from "../../components/Buttons/ButtonPrimary";
 
 interface ColumnProps {
   column: ColumnnType;
@@ -90,14 +91,14 @@ const ColumnModifyForm = ({
         defaulValue={value.label}
         onInputChange={setInputValue}
       />
-      <button
+      <PrimaryButton
         onClick={() => {
           dispatch(updateColumn({ ...value, label: inputValue }));
           hideForm();
         }}
       >
         save
-      </button>
+      </PrimaryButton>
     </>
   );
 };

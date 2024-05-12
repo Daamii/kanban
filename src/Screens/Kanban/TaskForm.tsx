@@ -6,6 +6,7 @@ import Modal from "../../components/Modal/Modal";
 import { pushTask } from "../../store/kanbanSlice";
 import { TaskType } from "../../Types/types";
 import { v4 as uuidv4 } from "uuid";
+import { PrimaryButton } from "../../components/Buttons/ButtonPrimary";
 
 interface Props {
   isModalOpen: boolean;
@@ -41,7 +42,7 @@ export const TaskForm = ({ isModalOpen, closeModal }: Props) => {
         placeholder="Task description"
         onInputChange={setDescriptionValue}
       />
-      <button onClick={saveTask}>save</button>
+      <PrimaryButton onClick={saveTask}>save</PrimaryButton>
     </Modal>
   );
 };
