@@ -4,8 +4,11 @@ import { ColumnnType, TaskType } from "../../Types/types";
 import { MdDensityMedium as Burger } from "react-icons/md";
 import TextInput from "../../components/Inputs/TextInput";
 import { useDispatch } from "react-redux";
-import { updateColumn } from "../../store/kanbanSlice";
-import { PrimaryButton } from "../../components/Buttons/ButtonPrimary";
+import { removeColumn, updateColumn } from "../../store/kanbanSlice";
+import {
+  DestructiveButton,
+  PrimaryButton,
+} from "../../components/Buttons/ButtonPrimary";
 
 interface ColumnProps {
   column: ColumnnType;
@@ -68,7 +71,13 @@ export const KanbanColumn = ({
           )}
         </div>
       ) : (
-        <ColumnModifyForm value={column} hideForm={toggleEditionMode} />
+        <ColumnModifyForm
+          value={column}
+          hideForm={toggleEditionMode}
+          itemsAttached={
+            items.filter((f) => f.columnUuid == column.uuid).length
+          }
+        />
       )}
     </div>
   );
@@ -77,9 +86,11 @@ export const KanbanColumn = ({
 const ColumnModifyForm = ({
   value,
   hideForm,
+  itemsAttached,
 }: {
   value: ColumnnType;
   hideForm: () => void;
+  itemsAttached: number;
 }) => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState<string>(value.label);
@@ -99,6 +110,17 @@ const ColumnModifyForm = ({
       >
         save
       </PrimaryButton>
+
+      <DestructiveButton
+        enabled={itemsAttached == 0}
+        onClick={() => {
+          if (itemsAttached !== 0) return;
+          dispatch(removeColumn({ id: value.uuid }));
+          hideForm();
+        }}
+      >
+        remove column
+      </DestructiveButton>
     </>
   );
 };

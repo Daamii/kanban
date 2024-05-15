@@ -104,6 +104,13 @@ const kanbanSlice = createSlice({
       );
       state.columns[colIndex] = column;
     },
+    removeColumn: (
+      state,
+      action: PayloadAction<{ id: ColumnnType["uuid"] }>
+    ) => {
+      const { id } = action.payload;
+      state.columns = state.columns.filter((c) => c.uuid != id);
+    },
   },
 });
 
@@ -121,5 +128,6 @@ export const {
   removeTaskById,
   setColumns,
   updateColumn,
+  removeColumn,
 } = kanbanSlice.actions;
 export default kanbanSlice.reducer;
