@@ -5,3 +5,10 @@
   //   align-items: center;
   margin-top: 10px;
 }
+
+.kanban-control-panel {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 0 20px;
+  gap: 5px;
+}

@@ -12,7 +12,11 @@ import store from "./store/store";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <NavBarComponent />,
+    element: (
+      <NavBarComponent>
+        <KanbanPage />
+      </NavBarComponent>
+    ),
     errorElement: <RouteError />,
   },
   {

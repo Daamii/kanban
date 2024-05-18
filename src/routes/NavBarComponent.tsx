@@ -1,20 +1,31 @@
 import React, { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "./navbar.scss";
 
+const computeClassName = (elementPaths: string[], currentPath: string) => {
+  return `navbar__element ${
+    elementPaths.includes(currentPath) ? "navbar__element--current" : ""
+  }`;
+};
+
 const NavBarComponent: React.FC<{ children?: ReactNode }> = ({ children }) => {
+  const { pathname } = useLocation();
+
   return (
     <>
       <nav className="navbar">
-        <Link className="navbar__element" to={"/"}>
-          /
+        <Link
+          className={computeClassName(["/kanban", "/"], pathname)}
+          to={"/kanban"}
+        >
+          Kanban
         </Link>
-        <Link className="navbar__element" to={"/kanban"}>
-          kanban
-        </Link>
-        <Link className="navbar__element" to={"/error"}>
-          error
+        <Link
+          className={computeClassName(["/settings"], pathname)}
+          to={"/settings"}
+        >
+          Settings
         </Link>
       </nav>
       {children ?? null}
