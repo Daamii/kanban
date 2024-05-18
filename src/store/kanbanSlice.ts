@@ -100,6 +100,15 @@ const kanbanSlice = createSlice({
       state.tasks.push(action.payload);
       saveTasks(state.tasks);
     },
+    editTask: (state, action: PayloadAction<TaskType>) => {
+      const { payload: task } = action;
+
+      const taskIndex = state.tasks.findIndex(
+        (item) => item.uuid === task.uuid
+      );
+      state.tasks[taskIndex] = task;
+      saveTasks(state.tasks);
+    },
     updateList: (
       state,
       action: PayloadAction<{ taskId: string; newColumnId: string }>
@@ -154,6 +163,7 @@ export const selectTasks = createSelector(
 export const {
   setTasks,
   pushTask,
+  editTask,
   updateList,
   removeTaskById,
   setColumns,

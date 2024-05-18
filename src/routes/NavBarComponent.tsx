@@ -16,7 +16,7 @@ const NavBarComponent: React.FC<{ children?: ReactNode }> = ({ children }) => {
     <>
       <nav className="navbar">
         <Link
-          className={computeClassName(["/kanban", "/"], pathname)}
+          className={computeClassName(["/kanban/", "/kanban", "/"], pathname)}
           to={"/kanban"}
         >
           Kanban

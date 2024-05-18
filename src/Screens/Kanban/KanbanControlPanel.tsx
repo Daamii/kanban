@@ -12,6 +12,7 @@ export const KanbanControlPanel = () => {
   const kanbanData = useSelector(selectKanban);
 
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="kanban-control-panel">
       <PrimaryButton onClick={() => setIsOpen(true)}>create task</PrimaryButton>

@@ -1,12 +1,7 @@
-import React, { MouseEventHandler, ReactNode } from "react";
+import React from "react";
 
 import "./buttons.scss";
-
-interface CustomButtonProps {
-  children: ReactNode;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  enabled?: boolean;
-}
+import { CustomButtonProps } from "./types";
 
 export const PrimaryButton: React.FC<CustomButtonProps> = ({
   children,
@@ -14,21 +9,6 @@ export const PrimaryButton: React.FC<CustomButtonProps> = ({
 }) => {
   return (
     <button className="primary-button" onClick={onClick}>
-      {children}
-    </button>
-  );
-};
-export const DestructiveButton: React.FC<CustomButtonProps> = ({
-  children,
-  onClick,
-  enabled,
-}) => {
-  return (
-    <button
-      className={`destructive-button${!enabled ? " button-disabled" : ""}`}
-      disabled={!enabled}
-      onClick={onClick}
-    >
       {children}
     </button>
   );

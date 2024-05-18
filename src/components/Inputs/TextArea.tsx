@@ -3,11 +3,16 @@ import React from "react";
 import "./inputs.scss";
 
 interface TextAreaProps {
+  defaultValue?: string;
   placeholder?: string;
   onInputChange: (value: string) => void;
 }
 
-const TextArea: React.FC<TextAreaProps> = ({ placeholder, onInputChange }) => {
+const TextArea: React.FC<TextAreaProps> = ({
+  defaultValue,
+  placeholder,
+  onInputChange,
+}) => {
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target;
     onInputChange(value);
@@ -15,6 +20,7 @@ const TextArea: React.FC<TextAreaProps> = ({ placeholder, onInputChange }) => {
 
   return (
     <textarea
+      defaultValue={defaultValue}
       className="text-input"
       placeholder={placeholder}
       onChange={handleChange}

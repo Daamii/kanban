@@ -5,10 +5,8 @@ import { MdDensityMedium as Burger } from "react-icons/md";
 import TextInput from "../../components/Inputs/TextInput";
 import { useDispatch } from "react-redux";
 import { removeColumn, updateColumn } from "../../store/kanbanSlice";
-import {
-  DestructiveButton,
-  PrimaryButton,
-} from "../../components/Buttons/ButtonPrimary";
+import { PrimaryButton } from "../../components/Buttons/ButtonPrimary";
+import { DestructiveButton } from "../../components/Buttons/DestructiveButtons";
 
 interface ColumnProps {
   column: ColumnnType;
