@@ -1,6 +1,6 @@
 import React from "react";
 import "./kanban.scss";
-import { TaskType, ColumnnType } from "../../Types/types";
+import { TaskType, ColumnnType } from "../../Types/kanbanTypes";
 import { useDragAndDrop } from "../../hooks/useDragAndDrops";
 import { KanbanColumn } from "./KanbanColumn";
 import { useDispatch } from "react-redux";

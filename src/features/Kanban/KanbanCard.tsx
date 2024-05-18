@@ -1,6 +1,6 @@
 import React from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
-import { TaskType } from "../../Types/types";
+import { TaskType } from "../../Types/kanbanTypes";
 
 interface CardProps {
   data: TaskType;

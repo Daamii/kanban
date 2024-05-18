@@ -1,6 +1,11 @@
+import {
+  getFromLocalStorage,
+  LocalStoreItem,
+  saveToLocalStorage,
+} from "./../utils/localStorage";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { v4 } from "uuid";
-import { ColumnnType, TaskType } from "../Types/types";
+import { ColumnnType, TaskType } from "../Types/kanbanTypes";
 
 const sampleColumns: ColumnnType[] = [
   { uuid: "1", label: "Main Column", order: 1 },
@@ -54,14 +59,33 @@ const sampleData: TaskType[] = [
   },
 ];
 
+const TASKS_SAVING_KEY = "kanban-tasks";
+const COLUMNS_SAVING_KEY = "kanban-columns";
+
 interface KanbanState {
   tasks: TaskType[];
   columns: ColumnnType[];
 }
 
 const initialState: KanbanState = {
-  tasks: sampleData,
-  columns: sampleColumns,
+  tasks: getFromLocalStorage(TASKS_SAVING_KEY) || sampleData,
+  columns: getFromLocalStorage(COLUMNS_SAVING_KEY) || sampleColumns,
+};
+
+const saveTasks = (tasks: TaskType[]) => {
+  const itemToSave: LocalStoreItem = {
+    key: TASKS_SAVING_KEY,
+    value: tasks,
+  };
+  saveToLocalStorage(itemToSave);
+};
+
+const saveColumns = (columns: ColumnnType[]) => {
+  const itemToSave: LocalStoreItem = {
+    key: COLUMNS_SAVING_KEY,
+    value: columns,
+  };
+  saveToLocalStorage(itemToSave);
 };
 
 const kanbanSlice = createSlice({
@@ -70,11 +94,12 @@ const kanbanSlice = createSlice({
   reducers: {
     setTasks: (state, action) => {
       state.tasks = action.payload;
+      saveTasks(state.tasks);
     },
     pushTask: (state, action) => {
       state.tasks.push(action.payload);
+      saveTasks(state.tasks);
     },
-
     updateList: (
       state,
       action: PayloadAction<{ taskId: string; newColumnId: string }>
@@ -88,13 +113,16 @@ const kanbanSlice = createSlice({
       ) {
         state.tasks[cardIndex].columnUuid = newColumnId;
       }
+      saveTasks(state.tasks);
     },
     removeTaskById: (state, action: PayloadAction<{ id: string }>) => {
       const { id } = action.payload;
       state.tasks = state.tasks.filter((t) => t.uuid != id);
+      saveTasks(state.tasks);
     },
     setColumns: (state, action) => {
       state.columns = action.payload;
+      saveTasks(state.tasks);
     },
     updateColumn: (state, action: PayloadAction<ColumnnType>) => {
       const { payload: column } = action;
@@ -103,6 +131,7 @@ const kanbanSlice = createSlice({
         (item) => item.uuid === column.uuid
       );
       state.columns[colIndex] = column;
+      saveColumns(state.columns);
     },
     removeColumn: (
       state,
@@ -110,6 +139,7 @@ const kanbanSlice = createSlice({
     ) => {
       const { id } = action.payload;
       state.columns = state.columns.filter((c) => c.uuid != id);
+      saveColumns(state.columns);
     },
   },
 });

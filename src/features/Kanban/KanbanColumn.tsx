@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { KanbanCard } from "./KanbanCard";
-import { ColumnnType, TaskType } from "../../Types/types";
+import { ColumnnType, TaskType } from "../../Types/kanbanTypes";
 import { MdDensityMedium as Burger } from "react-icons/md";
 import TextInput from "../../components/Inputs/TextInput";
 import { useDispatch } from "react-redux";

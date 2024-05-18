@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 import { PrimaryButton } from "../../components/Buttons/ButtonPrimary";
 import { KanbanGrid } from "../../features/Kanban/KanbanGrid";
 import { selectKanban, setColumns } from "../../store/kanbanSlice";
-import { ColumnnType } from "../../Types/types";
+import { ColumnnType } from "../../Types/kanbanTypes";
 
 import "./kanban-page.scss";
 import { TaskForm } from "./TaskForm";

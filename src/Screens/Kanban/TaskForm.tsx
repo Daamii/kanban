@@ -4,7 +4,7 @@ import TextArea from "../../components/Inputs/TextArea";
 import TextInput from "../../components/Inputs/TextInput";
 import Modal from "../../components/Modal/Modal";
 import { pushTask } from "../../store/kanbanSlice";
-import { TaskType } from "../../Types/types";
+import { TaskType } from "../../Types/kanbanTypes";
 import { v4 as uuidv4 } from "uuid";
 import { PrimaryButton } from "../../components/Buttons/ButtonPrimary";
 
