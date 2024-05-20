@@ -169,6 +169,8 @@ const kanbanSlice = createSlice({
 });
 
 export const selectKanban = (state: { kanban: KanbanState }) => state.kanban;
+export const selectKanbanColumns = (state: { kanban: KanbanState }) =>
+  state.kanban.columns;
 
 export const selectTasks = createSelector(
   selectKanban,
