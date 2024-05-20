@@ -4,7 +4,7 @@ import { TaskType, ColumnnType } from "../../Types/kanbanTypes";
 import { useDragAndDrop } from "../../hooks/useDragAndDrops";
 import { KanbanColumn } from "./KanbanColumn";
 import { useDispatch } from "react-redux";
-import { removeTaskById, updateList } from "../../store/kanbanSlice";
+import { removeTaskById, moveTaskToColumn } from "../../store/kanbanSlice";
 
 interface Props {
   tasks: TaskType[];
@@ -24,8 +24,10 @@ export const KanbanGrid = ({ tasks, columns }: Props) => {
           items={tasks}
           isDragging={isDragging}
           handleDragging={handleDragging}
-          handleUpdateList={(taskId, columnId) =>
-            dispatch(updateList({ taskId: taskId, newColumnId: columnId }))
+          handleMoveTaskToColumn={(taskId, columnId) =>
+            dispatch(
+              moveTaskToColumn({ taskId: taskId, newColumnId: columnId })
+            )
           }
           handleRemoveFromList={(id) => dispatch(removeTaskById({ id }))}
         />

@@ -8,9 +8,9 @@ import { v4 } from "uuid";
 import { ColumnnType, TaskType } from "../Types/kanbanTypes";
 
 const sampleColumns: ColumnnType[] = [
-  { uuid: "1", label: "Main Column", order: 1 },
-  { uuid: "2", label: "Secondary Column", order: 2 },
-  { uuid: "3", label: "Extra Column", order: 3 },
+  { uuid: "1", label: "To Do", order: 1 },
+  { uuid: "2", label: "Doing", order: 2 },
+  { uuid: "3", label: "Done", order: 3 },
 ];
 
 const sampleData: TaskType[] = [
@@ -109,7 +109,7 @@ const kanbanSlice = createSlice({
       state.tasks[taskIndex] = task;
       saveTasks(state.tasks);
     },
-    updateList: (
+    moveTaskToColumn: (
       state,
       action: PayloadAction<{ taskId: string; newColumnId: string }>
     ) => {
@@ -164,7 +164,7 @@ export const {
   setTasks,
   pushTask,
   editTask,
-  updateList,
+  moveTaskToColumn,
   removeTaskById,
   setColumns,
   updateColumn,
