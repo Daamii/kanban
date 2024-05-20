@@ -25,7 +25,7 @@ export const KanbanColumn = ({
   items,
   isDragging,
   handleDragging,
-  handleMoveTaskToColumn: handleMoveTaskToColumn,
+  handleMoveTaskToColumn,
   handleRemoveFromList,
 }: ColumnProps) => {
   const [editionModeActive, setEditionModeActive] = useState(false);
