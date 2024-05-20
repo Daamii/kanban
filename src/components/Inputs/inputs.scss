@@ -40,3 +40,30 @@
     background-color: var(--color-secondary);
   }
 }
+
+.select-input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  label {
+    font-size: 1rem;
+    background: var(--color-secondary);
+    padding: 0 4px;
+  }
+
+  select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #333;
+
+    &:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    }
+  }
+}
