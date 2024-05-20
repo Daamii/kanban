@@ -40,6 +40,14 @@ export const KanbanColumn = ({
     handleDragging(false);
   };
 
+  const sortTasks = (tasks: TaskType[]) => {
+    return [...tasks].sort((a: TaskType, b: TaskType) => {
+      const orderA = a.order ?? 0;
+      const orderB = b.order ?? 0;
+      return orderA - orderB;
+    });
+  };
+
   const toggleEditionMode = () => setEditionModeActive((prev) => !prev);
 
   return (
@@ -59,7 +67,7 @@ export const KanbanColumn = ({
       </div>
       {!editionModeActive ? (
         <div className="kanban-column__content">
-          {items.map(
+          {sortTasks(items).map(
             (item) =>
               column.uuid === item.columnUuid && (
                 <KanbanCard

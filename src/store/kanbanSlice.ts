@@ -96,8 +96,11 @@ const kanbanSlice = createSlice({
       state.tasks = action.payload;
       saveTasks(state.tasks);
     },
-    pushTask: (state, action) => {
-      state.tasks.push(action.payload);
+    pushTask: (state, action: PayloadAction<TaskType>) => {
+      const columnTasks = state.tasks.filter(
+        (t) => t.columnUuid == action.payload.columnUuid
+      );
+      state.tasks.push({ ...action.payload, order: columnTasks.length });
       saveTasks(state.tasks);
     },
     editTask: (state, action: PayloadAction<TaskType>) => {
@@ -120,7 +123,19 @@ const kanbanSlice = createSlice({
         cardIndex !== -1 &&
         state.tasks[cardIndex].columnUuid !== newColumnId
       ) {
-        state.tasks[cardIndex].columnUuid = newColumnId;
+        // move to new column
+        const movedTask = state.tasks[cardIndex];
+        movedTask.columnUuid = newColumnId;
+        movedTask.order = 0;
+
+        // update rest of tasks of the column
+        state.tasks
+          .filter((task) => task.columnUuid === newColumnId)
+          .forEach((task, index) => {
+            if (task.uuid !== movedTask.uuid) {
+              task.order = index + 1;
+            }
+          });
       }
       saveTasks(state.tasks);
     },
