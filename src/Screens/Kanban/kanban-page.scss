@@ -25,7 +25,14 @@
   }
   &__footer {
     display: flex;
-    flex-direction: row-reverse;
-    gap: 20px;
+    flex-direction: column;
+    // gap: 20px;
+    &__errors {
+      color: red;
+    }
+    &__buttons {
+      display: flex;
+      flex-direction: row-reverse;
+    }
   }
 }
