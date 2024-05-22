@@ -12,3 +12,20 @@
   padding: 0 20px;
   gap: 5px;
 }
+
+.taskform {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 60vh;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  &__footer {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 20px;
+  }
+}

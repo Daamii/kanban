@@ -35,7 +35,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
 
   return (
     <div className="select-input-container">
-      <label htmlFor="select-input">Selecciona una opción:</label>
+      <label htmlFor="select-input">Column:</label>
       <select id="select-input" value={selectedOption} onChange={handleChange}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>

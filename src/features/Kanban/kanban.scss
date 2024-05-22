@@ -79,6 +79,9 @@
     justify-content: flex-end;
     gap: 3px;
 
+    &__label {
+      font-size: 0.7em;
+    }
     &__button {
       display: flex;
       justify-content: center;

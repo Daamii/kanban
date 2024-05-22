@@ -60,23 +60,29 @@ export const TaskForm = ({ currentValue, isModalOpen, closeModal }: Props) => {
       onClose={closeModal}
       title={currentValue ? "Edit task" : "Create new Task"}
     >
-      <TextInput
-        defaulValue={currentValue?.label}
-        label="Task name"
-        placeholder=""
-        onInputChange={setInputValue}
-      />
-      <TextArea
-        defaultValue={currentValue?.content}
-        placeholder="Task description"
-        onInputChange={setDescriptionValue}
-      />
-      <SelectInput
-        defaultValue={currentValue?.columnUuid}
-        options={options}
-        onChange={setColumnUuid}
-      />
-      <PrimaryButton onClick={saveTask}>save</PrimaryButton>
+      <div className="taskform">
+        <div className="taskform__content">
+          <TextInput
+            defaulValue={currentValue?.label}
+            label="Task name"
+            placeholder=""
+            onInputChange={setInputValue}
+          />
+          <TextArea
+            defaultValue={currentValue?.content}
+            placeholder="Task description"
+            onInputChange={setDescriptionValue}
+          />
+          <SelectInput
+            defaultValue={currentValue?.columnUuid}
+            options={options}
+            onChange={setColumnUuid}
+          />
+        </div>
+        <div className="taskform__footer">
+          <PrimaryButton onClick={saveTask}>save</PrimaryButton>
+        </div>
+      </div>
     </Modal>
   );
 };
