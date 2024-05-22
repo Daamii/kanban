@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { MdEdit, MdDelete, MdCheck, MdOutlineClose } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import { TaskForm } from "../../Screens/Kanban/TaskForm";
+import { markTaskAsFinished } from "../../store/kanbanSlice";
 import { TaskType } from "../../Types/kanbanTypes";
 
 interface CardProps {
@@ -14,9 +16,14 @@ export const KanbanCard = ({
   handleDragging,
   handleRemoveFromList,
 }: CardProps) => {
+  const dispatch = useDispatch();
+
   const [isOpen, setIsOpen] = useState(false);
   const [deleteConfirmed, setSeleteConfirmed] = useState(false);
 
+  const markAsfinished = () => {
+    dispatch(markTaskAsFinished(data.uuid));
+  };
   const handleDelete = () => {
     deleteConfirmed && handleRemoveFromList(data.uuid);
   };
@@ -34,7 +41,13 @@ export const KanbanCard = ({
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
-        <div className="kanban-card__label">{data.label}</div>
+        <div
+          className={`kanban-card__label ${
+            data.isFinished ? "kanban-card__label--finished" : ""
+          }`}
+        >
+          {data.label}
+        </div>
         <div className="kanban-card__description">{data.content}</div>
         <div className="kanban-card__buttons">
           {deleteConfirmed ? (
@@ -55,6 +68,14 @@ export const KanbanCard = ({
             </>
           ) : (
             <>
+              {!data.isFinished && (
+                <div
+                  className="kanban-card__buttons__button"
+                  onClick={markAsfinished}
+                >
+                  <MdCheck />
+                </div>
+              )}
               <div
                 className="kanban-card__buttons__button"
                 onClick={() => setIsOpen(true)}

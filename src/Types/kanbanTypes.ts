@@ -5,6 +5,7 @@ export interface TaskType {
   columnUuid: string;
   content?: string;
   order?: number;
+  isFinished?: boolean;
 }
 
 export interface ColumnnType {

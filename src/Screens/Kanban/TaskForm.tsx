@@ -107,6 +107,12 @@ export const TaskForm = ({ currentValue, isModalOpen, closeModal }: Props) => {
             options={options}
             onChange={setColumnUuid}
           />
+          {currentValue?.creationDate && (
+            <>
+              Creation date:{" "}
+              {new Date(currentValue?.creationDate).toLocaleDateString()}
+            </>
+          )}
         </div>
 
         <div className="taskform__footer">

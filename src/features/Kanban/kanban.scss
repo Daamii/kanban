@@ -62,6 +62,9 @@
   &__label {
     font-weight: bold;
     border-bottom: 1px solid;
+    &--finished {
+      text-decoration: line-through;
+    }
   }
   &__description {
     font-size: 0.9em;

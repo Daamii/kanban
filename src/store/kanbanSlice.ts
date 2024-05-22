@@ -112,6 +112,12 @@ const kanbanSlice = createSlice({
       state.tasks[taskIndex] = task;
       saveTasks(state.tasks);
     },
+    markTaskAsFinished: (state, action: PayloadAction<TaskType["uuid"]>) => {
+      const uuid = action.payload;
+      const taskIndex = state.tasks.findIndex((item) => item.uuid === uuid);
+      state.tasks[taskIndex].isFinished = true;
+      saveTasks(state.tasks);
+    },
     moveTaskToColumn: (
       state,
       action: PayloadAction<{ taskId: string; newColumnId: string }>
@@ -181,6 +187,7 @@ export const {
   setTasks,
   pushTask,
   editTask,
+  markTaskAsFinished,
   moveTaskToColumn,
   removeTaskById,
   setColumns,
