@@ -39,6 +39,9 @@ export const TaskForm = ({ currentValue, isModalOpen, closeModal }: Props) => {
 
   // use state
   const [errors, setErrors] = useState<ErrorCode[]>([]);
+  const [isFinished, setIsFinished] = useState<boolean>(
+    !!currentValue?.isFinished
+  );
   const [inputValue, setInputValue] = useState<string>(
     currentValue?.label ?? ""
   );
@@ -78,6 +81,7 @@ export const TaskForm = ({ currentValue, isModalOpen, closeModal }: Props) => {
         ? currentValue.creationDate
         : new Date().toISOString(),
       columnUuid: columnUuid ?? currentValue?.columnUuid ?? "1",
+      isFinished: isFinished,
     };
     currentValue ? dispatch(editTask(taskData)) : dispatch(pushTask(taskData));
     closeModal();
@@ -107,11 +111,21 @@ export const TaskForm = ({ currentValue, isModalOpen, closeModal }: Props) => {
             options={options}
             onChange={setColumnUuid}
           />
+          {currentValue?.isFinished && (
+            <PrimaryButton
+              onClick={() => {
+                setIsFinished(false);
+              }}
+              enabled={isFinished}
+            >
+              Mark as unfinished
+            </PrimaryButton>
+          )}
           {currentValue?.creationDate && (
-            <>
+            <div>
               Creation date:{" "}
               {new Date(currentValue?.creationDate).toLocaleDateString()}
-            </>
+            </div>
           )}
         </div>
 

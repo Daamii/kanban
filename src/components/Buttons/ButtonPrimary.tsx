@@ -6,9 +6,14 @@ import { CustomButtonProps } from "./types";
 export const PrimaryButton: React.FC<CustomButtonProps> = ({
   children,
   onClick,
+  enabled = true,
 }) => {
   return (
-    <button className="primary-button" onClick={onClick}>
+    <button
+      disabled={!enabled}
+      className={enabled ? "primary-button" : "disabled-button"}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

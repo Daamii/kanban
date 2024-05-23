@@ -92,11 +92,13 @@ export const KanbanCard = ({
           )}
         </div>
       </span>
-      <TaskForm
-        currentValue={data}
-        isModalOpen={isOpen}
-        closeModal={() => setIsOpen(false)}
-      />
+      {isOpen && (
+        <TaskForm
+          currentValue={data}
+          isModalOpen={isOpen}
+          closeModal={() => setIsOpen(false)}
+        />
+      )}
     </>
   );
 };
