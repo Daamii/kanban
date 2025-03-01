@@ -49,7 +49,7 @@ export const TaskForm = ({ currentValue, isModalOpen, closeModal }: Props) => {
     currentValue?.content ?? ""
   );
   const [columnUuid, setColumnUuid] = useState<string>(
-    currentValue?.columnUuid ?? ""
+    currentValue?.columnUuid ?? "1"
   );
 
   // form
